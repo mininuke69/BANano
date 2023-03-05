@@ -4,22 +4,26 @@ from json import load
 
 gecko_endpoint = 'https://api.coingecko.com/api/v3'
 ban_node_endpoint = 'https://kaliumapi.appditto.com/api'
-xno_node_endpoint = None
+xno_node_endpoint = 'https://mynano.ninja/api/node'
 
-wallets = open('accounts.txt', 'r').read()
+wallets_file = open('accounts.txt', 'r')
+wallets = load(wallets_file)
+
 ban_seed = wallets['ban']['seed']
 ban_address = wallets['ban']['address']
 xno_seed = wallets['xno']['seed']
-xno_address = wallets['xno']['adress']
+xno_address = wallets['xno']['address']
 
 bal_ban = None
 bal_xno = None
-
+receivable_ban = None
+receivable_xno = None
 
 def Update_Balance():
     global bal_ban
     global bal_xno
-
+    global receivable_ban
+    global receivable_xno
 
     ban_json = {
                 "action": "account_balance",
@@ -27,6 +31,12 @@ def Update_Balance():
                 }
     bal_ban_request = rq.post(ban_node_endpoint, json=ban_json).json()
     bal_ban = bal_ban_request['balance_decimal']
+    receivable_ban = bal_ban_request['receivable_decimal']
+
+
+def Receive():
+    if receivable_ban > 0:
+        ban_json
 
 
 
