@@ -1,5 +1,7 @@
 import requests as rq
 from json import load
+import bananopie
+
 
 
 gecko_endpoint = 'https://api.coingecko.com/api/v3'
@@ -36,7 +38,7 @@ def Update_Balance():
 
 def Receive():
     if receivable_ban > 0:
-        ban_json
+        ban_json = None
 
 
 
